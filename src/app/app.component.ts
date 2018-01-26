@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
   getCount() {
     this.count$ = this.people$.pipe(
       map(_ => {
-        // some additional computation here.
+        // some additional complex computation here. i.e, reduce, scan, etc.
         return 1;
       })
     );
