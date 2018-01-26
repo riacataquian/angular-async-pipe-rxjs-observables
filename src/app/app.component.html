@@ -1,8 +1,16 @@
-<app-list-container>
-  <div class="header">
-    <h1>Header</h1>
-  </div>
+<app-list-container [contentStatus]="contentStatus$ | async">
+  <div class="loading">Loading data..</div>
   <div class="content">
-    <h1>Content</h1>
+    <h1>Total count: {{count$ | async}}</h1>
+    <ul>
+      <li *ngFor="let person of people$ | async" >
+        <p>ID: {{ person.id }}</p>
+        <p>Name: {{ person.name }}</p>
+      </li>
+    </ul>
+    <button (click)="refresh()">Refresh</button>
+  </div>
+  <div class="error">
+    <h1>Some Error</h1>
   </div>
 </app-list-container>
