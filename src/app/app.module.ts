@@ -9,11 +9,14 @@ import { AppComponent } from './app.component';
 import { ListContainerComponent } from './list-container/list-container.component';
 
 import {SomeService} from './some.service';
+import { FeedCardComponent } from './feed-card/feed-card.component';
+import { BackendService } from './backend.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListContainerComponent
+    ListContainerComponent,
+    FeedCardComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import {SomeService} from './some.service';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [SomeService],
+  providers: [SomeService, BackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
