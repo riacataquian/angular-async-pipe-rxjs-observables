@@ -1,4 +1,4 @@
-// TODO: Make me enum. Fix typescript version first.
+// TODO: Make me enum.
 export const ContentState = {
   LOADING: "loading",
   READY: "ready",

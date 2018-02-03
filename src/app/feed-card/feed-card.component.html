@@ -1,5 +1,5 @@
-<div [ngSwitch]="contentStatus">
+<div [ngSwitch]="contentState | async">
   <ng-content *ngSwitchCase="states.LOADING" select=".loading"></ng-content>
-  <ng-content *ngSwitchCase="states.READY" select=".content"></ng-content>
+  <ng-content *ngSwitchCase="states.READY" select=".ready"></ng-content>
   <ng-content *ngSwitchDefault select=".error"></ng-content>
 </div>

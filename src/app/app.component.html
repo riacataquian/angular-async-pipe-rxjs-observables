@@ -1,16 +1,21 @@
-<app-list-container [contentStatus]="contentStatus$ | async">
-  <div class="loading">Loading data..</div>
-  <div class="content">
-    <h1>Total count: {{count$ | async}}</h1>
-    <ul>
-      <li *ngFor="let person of people$ | async" >
-        <p>ID: {{ person.id }}</p>
-        <p>Name: {{ person.name }}</p>
+<div *ngIf="backendService.counter | async as c" class="timestamp">
+  <span>Counter:</span>
+  {{ c }}
+</div>
+<app-feed-card [contentState]="backendService.state">
+  <div class="loading">
+    Loading..
+  </div>
+  <div *ngIf="backendService.feed | async as feed" class="ready">
+    <h1>Total dogs in this city: {{ feed.total }} </h1>
+    <ul *ngFor="let person of feed.people">
+      <li>
+        <p>Name: {{ person.name }} </p>
+        <p>How many dogs does this person have?: {{ person.dogs }} </p>
       </li>
     </ul>
-    <button (click)="refresh()">Refresh</button>
   </div>
   <div class="error">
-    <h1>Some Error</h1>
+    <h1>Some error!</h1>
   </div>
-</app-list-container>
+</app-feed-card>

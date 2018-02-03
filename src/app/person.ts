@@ -1,4 +1,7 @@
+/**
+ * Describes a Person entry from the backend.
+ */
 export class Person {
-  id: number;
+  dogs: number;
   name: string;
 }
