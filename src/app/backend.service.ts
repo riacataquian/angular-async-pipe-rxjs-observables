@@ -7,15 +7,9 @@ import { timer } from 'rxjs/observable/timer';
 import { of } from 'rxjs/observable/of';
 import {
   catchError,
-  share,
   shareReplay,
   startWith,
   map,
-  publish,
-  publishLast,
-  publishReplay,
-  refCount,
-  mapTo,
   switchMap,
 } from 'rxjs/operators';
 
@@ -67,6 +61,7 @@ export class BackendService {
         // https://github.com/angular/angular/blob/5.2.3/packages/common/src/pipes/async_pipe.ts#L23
         return of(err);
       }),
+      // Add this so that multiple AsyncPipes wouldn't cause multiple http calls (in a real world working app).
       shareReplay(1),
     );
 

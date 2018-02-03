@@ -7,7 +7,6 @@
     Loading..
   </div>
   <div *ngIf="backendService.feed | async as feed" class="ready">
-    <h1>{{ s }}</h1>
     <h1>Total dogs in this city: {{ feed.total }} </h1>
     <ul *ngFor="let person of feed.people">
       <li>
