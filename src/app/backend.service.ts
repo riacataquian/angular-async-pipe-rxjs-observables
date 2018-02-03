@@ -51,12 +51,13 @@ export class BackendService {
 
     const data$ = source.pipe(
       switchMap((num: number) => {
-        return this.getResponse(num);
+        // Simulate the scenario in where an error is encountered after 25 timer ticks.
+        if (num === 25) {
+          const err = new Error("some http? maybe error");
+          return Observable.throw(err);
+        }
 
-        // NOTE:
-        // Comment me out to simulate the scenario in where an error is encountered.
-        // const err = new Error("some http? maybe error");
-        // return Observable.throw(err);
+        return this.getResponse(num);
       }),
       catchError(err => {
         // Catch the error before it go through template's AsyncPipe.
@@ -106,7 +107,7 @@ export class BackendService {
 
   private getResponse(counter: number): Observable<Response> {
     const people = [1, 2, 3, 4, 5].map((n) => {
-      return { dogs: n * counter, name: `Human ${counter}` };
+      return { dogs: n + counter, name: `Human ${counter}` };
     });
 
     return of({
