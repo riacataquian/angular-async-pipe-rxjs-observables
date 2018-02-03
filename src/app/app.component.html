@@ -8,8 +8,8 @@
   </div>
   <div *ngIf="backendService.feed | async as feed" class="ready">
     <h1>Total dogs in this city: {{ feed.total }} </h1>
-    <ul *ngFor="let person of feed.people">
-      <li>
+    <ul>
+      <li *ngFor="let person of feed.people">
         <p>Name: {{ person.name }} </p>
         <p>How many dogs does this person have?: {{ person.dogs }} </p>
       </li>
