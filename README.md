@@ -1,4 +1,10 @@
-# ObsPipe
+# angular-async-pipe-rxjs-observables
+
+This is a sample project playing around with Angular 4' **AsyncPipe** for RxJS Observables.
+It includes:
+- Simulated stream of data. Typically by an HTTP service.
+- Manage UI states: **loading**, **error** and **completed**.
+- Delegate Observable.subscribe() to Angular templates.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.3.
 
