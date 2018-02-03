@@ -55,8 +55,8 @@ export class BackendService {
       switchMap((num: number) => {
         return this.getData(num);
 
-        // Comment me out to simulate the scenario
-        // in where an error is encountered.
+        // NOTE:
+        // Comment me out to simulate the scenario in where an error is encountered.
         // const err = new Error("some http? maybe error");
         // return Observable.throw(err);
       }),
