@@ -1,6 +1,7 @@
 # angular-async-pipe-rxjs-observables
 
-This is a sample project playing around with Angular 4' **AsyncPipe** for RxJS Observables.
+This is a sample project playing around with Angular's **AsyncPipe** to subsrcibe to RxJS Observables.
+
 It includes:
 - Simulated stream of data. Typically by an HTTP service.
 - Manage UI states: **loading**, **error** and **completed**.
