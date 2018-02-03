@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+// Enables throw method for Observable.
 import 'rxjs/add/observable/throw';
 import { timer } from 'rxjs/observable/timer';
 import { of } from 'rxjs/observable/of';
@@ -14,21 +14,25 @@ import {
 } from 'rxjs/operators';
 
 import {ContentState} from './states';
-import {SomeService} from './some.service';
-import {Person, Feed, Data} from './person';
+import { Response } from './response';
+import { Feed } from './feed';
+import { Person } from './person';
 
+/**
+ * Periodic refresh interval.
+ */
 const REFRESH_INTERVAL_MS = 10 * 100;
 
 @Injectable()
 export class BackendService {
   constructor(private http: HttpClient) { }
 
-  private readonly testUrl = '/api/people';
-
+  /**
+    * Holds the state of the UI content.
+    */
   private _contentState$: Observable<string>;
-
-  private _counter$: Observable<number>;
   private _feed$: Observable<Feed>;
+  private _counter$: Observable<number>;
 
   get state() {
     return this._contentState$;
@@ -47,7 +51,7 @@ export class BackendService {
 
     const data$ = source.pipe(
       switchMap((num: number) => {
-        return this.getData(num);
+        return this.getResponse(num);
 
         // NOTE:
         // Comment me out to simulate the scenario in where an error is encountered.
@@ -64,8 +68,6 @@ export class BackendService {
       // Add this so that multiple AsyncPipes wouldn't cause multiple http calls (in a real world working app).
       shareReplay(1),
     );
-
-    data$.subscribe();
 
     this._contentState$ = data$.pipe(
       map(resp => {
@@ -84,7 +86,7 @@ export class BackendService {
         if (resp instanceof Error) return {};
 
         // Infer resp's type.
-        const data = resp as Data;
+        const data = resp as Response;
         const people =  data.items;
         const total = people.reduce((acc, next: Person) => {
           return next.dogs + acc;
@@ -98,11 +100,11 @@ export class BackendService {
     );
 
     this._counter$ = data$.pipe(
-      map((resp: Data) => resp.counter),
+      map((resp: Response) => resp.counter),
     );
   }
 
-  private getData(counter: number): Observable<Data> {
+  private getResponse(counter: number): Observable<Response> {
     const people = [1, 2, 3, 4, 5].map((n) => {
       return { dogs: n * counter, name: `Human ${counter}` };
     });

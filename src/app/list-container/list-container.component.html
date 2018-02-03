@@ -1,5 +1,0 @@
-<div [ngSwitch]="contentStatus">
-  <ng-content *ngSwitchCase="states.LOADING" select=".loading"></ng-content>
-  <ng-content *ngSwitchCase="states.READY" select=".content"></ng-content>
-  <ng-content *ngSwitchDefault select=".error"></ng-content>
-</div>
